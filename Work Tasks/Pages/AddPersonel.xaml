@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Work_Tasks.Classes"
+            xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             x:Class="Work_Tasks.Pages.AddPersonel">
+    
+    <Grid ColumnDefinitions="*, *">
+        <SearchBar Placeholder="Search per person" 
+                   x:Name="searchName"
+                   TextChanged="searchName_TextChanged"
+                    HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   MaximumHeightRequest="40"
+                   MinimumWidthRequest="200"
+                   Margin="0, 0, 150, 0"/>
+        <ScrollView Margin="100, 100">
+            <CollectionView x:Name="taskList">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                           SnapPointsType="MandatorySingle"
+                           SnapPointsAlignment="Start" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Task">
+                        <VerticalStackLayout Margin="15">
+                            <Entry Text="{Binding name}" IsReadOnly="True" />
+                            <Entry Text="{Binding departmentsString}" IsReadOnly="True"/>
+                            <HorizontalStackLayout>
+                                <inputs:SfComboBox ItemsSource="{Binding statusEnum}" BackgroundColor="Black" TextColor="Green" DropDownIconColor="Green" SelectedItem="{Binding status}"/>
+                                <Entry Text="{Binding deadline}" IsReadOnly="True" />
+                            </HorizontalStackLayout>
+                            <Entry Text="{Binding description}" IsReadOnly="True" />
+                            <Label Text="{Binding employeesString}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+        <StackLayout Grid.Column="2" VerticalOptions="Center">
+            <inputs:SfComboBox SelectionChanged="taskCombo_SelectionChanged" MaximumWidthRequest="200" HorizontalOptions="Center" Placeholder="Task" x:Name="taskCombo" BackgroundColor="Black" TextColor="Green" DropDownIconColor="Green"/>
+            <Label HorizontalOptions="Center" Text="+"/>
+            <inputs:SfComboBox MaximumWidthRequest="200" HorizontalOptions="Center" Placeholder="Employee" x:Name="employeeCombo" BackgroundColor="Black" TextColor="Green" DropDownIconColor="Green"/>
+            <ImageButton HorizontalOptions="Center" Aspect="AspectFill" x:Name="addBtn" Source="plus.png" BackgroundColor="Black" Clicked="addBtn_Clicked" HeightRequest="64" WidthRequest="64"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>

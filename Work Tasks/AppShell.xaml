@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Work_Tasks.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Work_Tasks"
+    xmlns:views="clr-namespace:Work_Tasks.Pages">
+
+    <TabBar>
+        <ShellContent
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage"
+            Icon="home.png"/>
+        <ShellContent
+            ContentTemplate="{DataTemplate views:AddPersonel}"
+            Route="AddPersonel"
+            Icon="add_contact.png"/>
+    </TabBar>
+
+</Shell>

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Work_Tasks.Classes"
+             xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             x:Class="Work_Tasks.MainPage">
+    <Grid>
+        <FlexLayout VerticalOptions="Center" HorizontalOptions="Center">
+            <StackLayout>
+                <CollectionView MaximumHeightRequest="500" Margin="0, 0, 500, 0"  x:Name="taskList">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                           SnapPointsType="MandatorySingle"
+                           SnapPointsAlignment="Start" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Task">
+                            <VerticalStackLayout Margin="15">
+                                <Entry Text="{Binding name}" IsReadOnly="True" />
+                                <Entry Text="{Binding departmentsString}" IsReadOnly="True"/>
+                                <HorizontalStackLayout>
+                                    <inputs:SfComboBox ItemsSource="{Binding statusEnum}" BackgroundColor="Black" TextColor="Green" DropDownIconColor="Green" SelectedItem="{Binding status}"/>
+                                    <Entry Text="{Binding deadline}" IsReadOnly="True" />
+                                    <Entry Text="{Binding author.fullName}" IsReadOnly="True"/>
+                                </HorizontalStackLayout>
+                                <Entry Text="{Binding description}" IsReadOnly="True" />
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+            <StackLayout Margin="0, 50, 200, 0" Padding="0, 0, 400, 0">
+                <Entry Placeholder="Name" x:Name="nameTxt"/>
+                <StackLayout HorizontalOptions="Center">
+                    <HorizontalStackLayout>
+                        <Label Text="Human Resources"/>
+                        <CheckBox x:Name="hrInput"  />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="Research and Development" />
+                        <CheckBox x:Name="rdInput" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="Support" />
+                        <CheckBox x:Name="supInput"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="Marketing" />
+                        <CheckBox x:Name="mInput" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="Sales" />
+                        <CheckBox x:Name="sInput"  />
+                    </HorizontalStackLayout>
+                </StackLayout>
+                <HorizontalStackLayout>
+                    <inputs:SfComboBox x:Name="statusTxt" Placeholder="Status" BackgroundColor="Black" TextColor="Green" DropDownIconColor="Green"/>
+                    <Entry Placeholder="deadline" x:Name="deadlineTxt"/>
+                    <Entry Placeholder="Author" x:Name="authorTxt"/>
+                </HorizontalStackLayout>
+                <Entry Placeholder="Description" x:Name="descTxt"/>
+            </StackLayout>
+        </FlexLayout>
+        <VerticalStackLayout VerticalOptions="Center" Margin="0,400,0,0" x:Name="orok">
+            <Label Text="Filters" HorizontalTextAlignment="Center" Margin="0,0,0,1"/>
+            <SearchBar Placeholder="Search" x:Name="searchBar" TextChanged="searchBar_TextChanged" MaxLength="30" MaximumWidthRequest="200"/>
+            <inputs:SfComboBox x:Name="statusFilter" Placeholder="Status" BackgroundColor="Black" TextColor="Green" DropDownIconColor="Green" SelectionChanged="statusFilter_SelectionChanged" MaximumWidthRequest="200"/>
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Label Text="Human Resources" />
+                <CheckBox x:Name="hrCb" CheckedChanged="hrCb_CheckedChanged"/>
+                <Label Text="Research and Development" />
+                <CheckBox x:Name="rdCb" CheckedChanged="rdCb_CheckedChanged"/>
+                <Label Text="Support" />
+                <CheckBox x:Name="supCb" CheckedChanged="supCb_CheckedChanged"/>
+                <Label Text="Marketing" />
+                <CheckBox x:Name="mCb" CheckedChanged="mCb_CheckedChanged"/>
+                <Label Text="Sales" />
+                <CheckBox x:Name="sCb" CheckedChanged="sCb_CheckedChanged"/>
+            </HorizontalStackLayout>
+            <ImageButton Aspect="AspectFill" x:Name="addBtn" Source="plus.png" BackgroundColor="Black" Clicked="addBtn_Clicked" HeightRequest="64" WidthRequest="64"/>
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <ImageButton Aspect="AspectFill" x:Name="removeBtn" Source="remove.png" BackgroundColor="Black" Clicked="removeBtn_Clicked" HeightRequest="64" WidthRequest="64"/>
+                <Entry Placeholder="Task to be removed" x:Name="removeTxt" MaxLength="30" MaximumWidthRequest="200" MaximumHeightRequest="20"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
